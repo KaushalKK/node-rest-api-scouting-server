@@ -3,28 +3,34 @@
 var q = require('q');
 
 module.exports = function (app, config) {
-	
-	var domain = require('./lib/domain/api-domain');
-	
 	var getTeam = function(req, res) {
-		domain.teams.single(req.params.team);
-		return {'message': 'Team: ' + req.params.team};
+		var teamNum = req.params.team;
+		console.log('Team: ' + teamNum);
+		return {'message': 'Team: ' + teamNum};
 	},
 	
 	getTeamMatches = function(req, res) {
-		return {'message': 'Team: ' + req.params.team + ' Matches requested'};
+		var teamNum = req.params.team;
+		console.log('Team: ' + teamNum + ' Matches requested');
+		return {'message': 'Team: ' + teamNum + ' Matches requested'};
 	},
 	
 	getEventTeams = function(req, res) {
-		return {'message': 'Event: ' + req.params.event + ' Teams requested'};
+		var eventCode = req.params.event;
+		console.log('Event: ' + eventCode + ' Teams requested');
+		return {'message': 'Event: ' + eventCode + ' Teams requested'};
 	},
 	
 	getEventAwards = function(req, res) {
-		return {'message': 'Event: ' + req.params.event + ' Awards requested'};
+		var eventCode = req.params.event;
+		console.log('Event: ' + eventCode + ' Awards requested');
+		return {'message': 'Event: ' + eventCode + ' Awards requested'};
 	},
 	
 	getEventMatches = function(req, res) {
-		return {'message': 'Event: ' + req.params.event + ' Matches requested'};
+		var eventCode = req.params.event;
+		console.log('Event: ' + eventCode + ' Matches requested');
+		return {'message': 'Event: ' + eventCode + ' Matches requested'};
 	};
 	
 	return {
@@ -32,7 +38,7 @@ module.exports = function (app, config) {
 		 * Configures API routes.
 		 */
 		configureRoutes: function () {
-			var routePrefix = '/api/catalog';
+			var routePrefix = '/api/scouting';
 			
 			/* Team Requests */
 			app.get(routePrefix + '/:team', getTeam);
