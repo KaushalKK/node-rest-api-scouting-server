@@ -1,7 +1,9 @@
-'use strict';
 var Sequelize = require('sequelize');
+var q = require('q');
 
-module.export = function(dbConfig) {
+module.exports = function(app, dbConfig) {
+	'use strict';
+
 	var options = {
 		host: dbConfig.host,
 		dialect: dbConfig.dialect || 'mysql',
@@ -70,9 +72,10 @@ module.export = function(dbConfig) {
 			};
 		}
 	};
+	
+	var models = require('./lib/models/db-models')(dbServer);
 
 	return {
-		server: dbServer,
-		models: require('./lib/models/db-models')(dbServer)
+		server: dbServer
 	};
 };
