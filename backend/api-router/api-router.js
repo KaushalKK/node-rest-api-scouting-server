@@ -2,11 +2,11 @@
 
 var q = require('q');
 
-module.exports = function (app, config, db, domain) {
+module.exports = function (app, config, domain) {
 	var getTeam = function(req, res) {
 		var teamNum = req.params.team;
 		console.log('Team: ' + teamNum);
-		return {'message': 'Team: ' + teamNum};
+		return domain.teams.search(req.params.team);
 	},
 	
 	getTeamMatches = function(req, res) {

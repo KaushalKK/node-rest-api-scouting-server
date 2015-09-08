@@ -1,6 +1,6 @@
 'use strict';
 
-module.export = function(app, db) {
+module.exports = function(db) {
 	return {
 		teams: require('./teams')(db),
 		events: require('./events')(db)

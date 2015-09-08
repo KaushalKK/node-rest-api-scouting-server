@@ -74,10 +74,8 @@ module.exports = function(dbConfig) {
 	
 	dbServer.context = require('./db-context')(dbServer);
 
-	var models = require('./lib/models/db-models')(dbServer);
-
 	return {
-		models: models,
-		server: dbServer
+		server: dbServer,
+		models: require('./lib/models/db-models')(dbServer)
 	};
 }

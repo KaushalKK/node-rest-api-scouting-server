@@ -26,8 +26,8 @@ if ('development' === app.get('env')) {
 /* Backend Setup */
 var config = require('./config');
 var db = require('./backend/db/db-index')(config.db);
-var domain = require('./backend/api-router/lib/domain/api-domain');
-var api = require('./backend/api-router/api-router')(app, config, db, domain);
+var domain = require('./backend/api-router/lib/domain/api-domain')(db);
+var api = require('./backend/api-router/api-router')(app, config, domain);
 
 api.configureRoutes();
 /* End Backend Setup */
@@ -36,7 +36,8 @@ http.createServer(app).listen(app.get('port'), function () {
 	console.log('com.td.oca.itmProductCatalogApiServer server listening on port ' + app.get('port'));
 });
 
-var q = require('q');
+/* ONLY UNCOMMENT TO UPDATE DB SCHEMA */
+/*var q = require('q');
 
 q.when()
 .then(function() {
@@ -53,3 +54,4 @@ q.when()
 	console.log(err);
 	return err;	
 });
+/* END SCHEMA UPDATE BLOCK */
