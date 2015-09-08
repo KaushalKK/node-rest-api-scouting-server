@@ -1,8 +1,6 @@
 'use strict';
 
-module.export = function(app, config) {
-	var db = require('../../db/db-index');
-	
+module.export = function(app, db) {
 	return {
 		teams: require('./teams')(db),
 		events: require('./events')(db)

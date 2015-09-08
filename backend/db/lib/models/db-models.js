@@ -5,17 +5,17 @@ var q = require('q');
 module.exports = function (dbServer) {
 	var me = {
 		/* Input Models */
-		teams: require('./teams')(dbServer),
+		teams: require('./teams')(dbServer)/*,
 		awards: require('./awards')(dbServer),
 		events: require('./events')(dbServer),
-		matches: require('./matches')(dbServer),
+		matches: require('./matches')(dbServer),*/
 		
 		/* System Management Models */
-		users: require('./users')(dbServer)
+		// users: require('./users')(dbServer)
 	};
 	
 	/* Team Relationships */
-	me.teams.hasMany(me.awards, {
+	/*me.teams.hasMany(me.awards, {
 		foreignKey: 'award_name',
 		as: 'award'
 	});
@@ -28,7 +28,7 @@ module.exports = function (dbServer) {
 	me.teams.hasMany(me.matches, {
 		foreignKey: 'match_number',
 		as: 'match'
-	});
+	});*/
 	
 	return me;
 };

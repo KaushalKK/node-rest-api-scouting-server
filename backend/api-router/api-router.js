@@ -2,7 +2,7 @@
 
 var q = require('q');
 
-module.exports = function (app, config) {
+module.exports = function (app, config, db, domain) {
 	var getTeam = function(req, res) {
 		var teamNum = req.params.team;
 		console.log('Team: ' + teamNum);

@@ -25,12 +25,31 @@ if ('development' === app.get('env')) {
 
 /* Backend Setup */
 var config = require('./config');
+var db = require('./backend/db/db-index')(config.db);
 var domain = require('./backend/api-router/lib/domain/api-domain');
-var api = require('./backend/api-router/api-router')(app, config, domain);
+var api = require('./backend/api-router/api-router')(app, config, db, domain);
 
 api.configureRoutes();
 /* End Backend Setup */
 
 http.createServer(app).listen(app.get('port'), function () {
 	console.log('com.td.oca.itmProductCatalogApiServer server listening on port ' + app.get('port'));
+});
+
+var q = require('q');
+
+q.when()
+.then(function() {
+	return db.server.context.connect();
+})
+.then(function(connection) {
+	return connection.underlyingContext.context.updateSchema(false);
+})
+.then(function() {
+	console.log('success');
+	return;
+})
+.catch(function(err) {
+	console.log(err);
+	return err;	
 });

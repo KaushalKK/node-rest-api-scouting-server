@@ -1,19 +1,18 @@
 var Sequelize = require('sequelize');
-var q = require('q');
 
-module.exports = function(app, dbConfig) {
+module.exports = function(dbConfig) {
 	'use strict';
 
 	var options = {
-		host: dbConfig.host,
-		dialect: dbConfig.dialect || 'mysql',
-		logging: dbConfig.logging	
+		host: dbConfig.dbHost,
+		dialect: dbConfig.dbDialect || 'mysql',
+		logging: dbConfig.dbLogging	
 	};
 	
 	var dbServer = new Sequelize(
 		dbConfig.dbName,
-		dbConfig.username,
-		dbConfig.password,
+		dbConfig.dbUser,
+		dbConfig.dbPass,
 		options
 	);
 	
@@ -73,9 +72,12 @@ module.exports = function(app, dbConfig) {
 		}
 	};
 	
+	dbServer.context = require('./db-context')(dbServer);
+
 	var models = require('./lib/models/db-models')(dbServer);
 
 	return {
+		models: models,
 		server: dbServer
 	};
-};
+}

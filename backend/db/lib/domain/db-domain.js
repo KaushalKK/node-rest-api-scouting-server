@@ -1,9 +1,7 @@
-'use strict';
-
-module.export = function() {
-	var me = {
-		test1: 'test 1'
+module.exports = function(dbContext) {
+	'use strict';
+	
+	return {
+		teams: require('./teams')(dbContext)
 	};
-
-	return me;
 };
