@@ -1,13 +1,13 @@
 module.exports = function (dbContext) {
 	'use strict';
 
-	var me = require('./db-record')(dbContext.models.teams, dbContext);
+	var record = require('./db-record')(dbContext.models.teams, dbContext);
 	
-	me.utils.extend({
+	return record.utils.extend({
 		search: function(teamNum) {
 			return dbContext.models.teams.findAll({
 				where: {
-					number: teamNum
+					'number': teamNum
 				}
 			})
 			.then(function(resp) {
@@ -18,6 +18,4 @@ module.exports = function (dbContext) {
 			});
 		}
 	});
-	
-	return me;
 };

@@ -6,7 +6,7 @@ module.exports = function (app, config, domain) {
 	var getTeam = function(req, res) {
 		var teamNum = req.params.team;
 		console.log('Team: ' + teamNum);
-		return domain.teams.search(req.params.team);
+		return res.send(domain.teams.search(req.params.team));
 	},
 	
 	getTeamMatches = function(req, res) {

@@ -5,20 +5,23 @@ module.exports = function (db) {
 	
 	return {
 		search: function(teamNum) {
+			var ret = [];
+
 			q.when()
 			.then(function() {
 				return db.server.context.connect();
 			})
 			.then(function(connection) {
-console.log(connection.domain.teams);
-				return connection.domain.teams.single(teamNum);
+				return connection.domain.teams.search(teamNum);
 			})
 			.then(function(resp) {
-console.log(resp);
-				return resp;
+				ret = resp.map(function(team) {
+					return team.dataValues || team;
+				});
+
+				return ret;
 			})
 			.catch(function(err) {
-console.log(err);
 				return err;
 			});
 		}

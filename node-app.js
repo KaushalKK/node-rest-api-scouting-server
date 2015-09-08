@@ -44,7 +44,7 @@ q.when()
 	return db.server.context.connect();
 })
 .then(function(connection) {
-	return connection.underlyingContext.context.updateSchema(false);
+	return connection.underlyingContext.context.updateSchema(true);
 })
 .then(function() {
 	console.log('success');
