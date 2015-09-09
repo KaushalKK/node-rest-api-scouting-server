@@ -17,6 +17,7 @@ module.exports = function (app, config, domain) {
 	};
 	
 	var getTeam = function(req, res) {
+		console.log('Team: ' + req.params.team + ' requested');
 		processRequest(domain.teams.findByNum(req.params.team), res);
 	},
 	
