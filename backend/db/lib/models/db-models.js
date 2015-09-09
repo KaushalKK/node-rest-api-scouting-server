@@ -6,9 +6,9 @@ module.exports = function (dbServer) {
 	var me = {
 		/* Input Models */
 		teams: require('./teams')(dbServer),
-		// awards: require('./awards')(dbServer),
-		events: require('./events')(dbServer)
-		// matches: require('./matches')(dbServer),
+		awards: require('./awards')(dbServer),
+		events: require('./events')(dbServer),
+		matches: require('./matches')(dbServer)
 		
 		/* System Management Models */
 		// users: require('./users')(dbServer)
@@ -29,6 +29,16 @@ module.exports = function (dbServer) {
 		foreignKey: 'match_number',
 		as: 'match'
 	});*/
+	
+	/* Match Relationships */
+	me.matches.hasOne(me.events, {
+		foreignKey: 'event'
+	});
+	
+	/* Award Relationships */
+	me.awards.hasOne(me.events, {
+		foreignKey: 'event'
+	});
 	
 	return me;
 };
