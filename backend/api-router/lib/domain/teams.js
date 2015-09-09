@@ -4,28 +4,21 @@ module.exports = function (db) {
 	'use strict';
 	
 	return {
-		search: function(teamNumOrName) {
-			var searchOptions = {
-				where: {}
-			};
-			
-			var teamNum = parseInt(teamNumOrName);
-			searchOptions.where = (teamNum !== NaN) ? { 'number': teamNum } : { name: teamNumOrName }; 
-console.log(searchOptions);
-			q.when()
-			.then(function() {
-				return db.server.context.connect();
-			})
+		findByNum: function(teamNum) {
+			var deferred = q.defer();
+
+			db.server.context.connect()
 			.then(function(connection) {
-				return connection.domain.teams.search(searchOptions);
+				return connection.domain.teams.searchByNumber(parseInt(teamNum));
 			})
-			.then(function(resp) {
-console.log(resp);
-				return resp;
+			.then(function(team) {
+				deferred.resolve(team);
 			})
 			.catch(function(err) {
-				return err;
+				deferred.reject(err);
 			});
+			
+			return deferred.promise;
 		}
 	};
 };

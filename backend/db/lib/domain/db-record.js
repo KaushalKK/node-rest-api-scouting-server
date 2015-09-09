@@ -45,12 +45,11 @@ module.exports = function (model, dbContext) {
 			}
 
 			findOpts.where = effectiveCriteria;
-			findOpts.attributes = attributes ?  attributes : [];
-			findOpts.include = joins ? joins : [];
+			findOpts.attributes = attributes ?  attributes : '';
+			findOpts.include = joins ? joins : '';
 
 			model.findAll(findOpts)
 			.then(function (result) {
-console.log(result);
 				deferred.resolve(
 					result.map(function (item) {
 						return item.dataValues || item;

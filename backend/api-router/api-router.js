@@ -3,16 +3,27 @@
 var q = require('q');
 
 module.exports = function (app, config, domain) {
+	var processRequest = function(method, res) {
+		q.when()
+		.then(function() {
+			return method;
+		})		
+		.then(function(resp) {
+			return res.send(resp);
+		})
+		.catch(function(err) {
+			return res.sendStatus(400);	
+		});
+	};
+	
 	var getTeam = function(req, res) {
-		var teamNum = req.params.team;
-		console.log('Team: ' + teamNum);
-		return res.send(domain.teams.search(req.params.team));
+		processRequest(domain.teams.findByNum(req.params.team), res);
 	},
 	
 	getTeamMatches = function(req, res) {
 		var teamNum = req.params.team;
 		console.log('Team: ' + teamNum + ' Matches requested');
-		return {'message': 'Team: ' + teamNum + ' Matches requested'};
+		return res.send({'message': 'Team: ' + teamNum + ' Matches requested'});
 	},
 	
 	getEventTeams = function(req, res) {

@@ -1,5 +1,19 @@
 module.exports = function (dbContext) {
 	'use strict';
 
-	return require('./db-record')(dbContext.models.teams, dbContext);
+	var record = require('./db-record')(dbContext.models.teams, dbContext);
+	
+	return record.utils.extend({
+		searchByNumber: function(teamNum) {
+			return dbContext.models.teams.findOne({
+				'number': teamNum
+			})
+			.then(function(resp) {
+				return resp.dataValues || resp;
+			})
+			.catch(function(err) {
+				return err;
+			});
+		}
+	});
 };
