@@ -36,8 +36,8 @@ http.createServer(app).listen(app.get('port'), function () {
 	console.log('com.td.oca.itmProductCatalogApiServer server listening on port ' + app.get('port'));
 });
 
-/* ONLY UNCOMMENT TO UPDATE DB SCHEMA */
-/*var q = require('q');
+/* ONLY UNCOMMENT TO UPDATE DB SCHEMA
+var q = require('q');
 
 q.when()
 .then(function() {

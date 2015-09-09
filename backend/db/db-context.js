@@ -1,15 +1,15 @@
 var q = require('q');
 
-module.exports = function(dbContext) {
+module.exports = function(dbServer) {
 	'use strict';
-	
+
 	var context = {
-		underlyingContext: dbContext,
-		domain: require('./lib/domain/db-domain')(dbContext)
+		underlyingContext: dbServer,
+		domain: require('./lib/domain/db-domain')(dbServer)
 	};
 
 	/* Making it possible for resources to communicate with each other. */
-	dbContext.domain = context.domain;
+	dbServer.domain = context.domain;
 
 	var me = {
 		/**

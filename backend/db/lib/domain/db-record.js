@@ -26,6 +26,45 @@ module.exports = function (model, dbContext) {
 		},
 		
 		/**
+		 * Returns all matching record.
+		 * @param criteria {object} Search criteria.
+		 * @param attributes {array=} Optional array to only return certain columns from table
+		 * @returns {*|Promise.<Array.<Instance>>} A promise which, when resolves, passes the result of an operation.
+		 */
+		search: function (criteria, joins, /**array=*/attributes) {
+			var effectiveCriteria = {},
+				deferred = q.defer(),
+				findOpts = {};
+
+			if (criteria) {
+				for (var prop in criteria) {
+					if (criteria[prop] !== undefined && criteria.hasOwnProperty(prop)) {
+						effectiveCriteria[prop] = criteria[prop];
+					}
+				}
+			}
+
+			findOpts.where = effectiveCriteria;
+			findOpts.attributes = attributes ?  attributes : [];
+			findOpts.include = joins ? joins : [];
+
+			model.findAll(findOpts)
+			.then(function (result) {
+console.log(result);
+				deferred.resolve(
+					result.map(function (item) {
+						return item.dataValues || item;
+					})
+				);
+			})
+			.catch(function(err) {
+				deferred.reject(err);	
+			});
+			
+			return deferred.promise;
+		},
+		
+		/**
 		 * Returns information about single record.
 		 * @param id {number} Category Id.
 		 * @returns {*|Promise.<Array.<Instance>>} A promise which, when resolves, passes the result of an operation.
