@@ -3,11 +3,11 @@ module.exports = function(dbServer) {
 
 	return dbServer.define('events',
 		dbServer.conventions.newFieldSet([
-			{ name: 'week', type: 'integer', allowedNull: false },
-			{ name: 'code', type: 'string', allowedNull: false, unique: true },
-			{ name: 'name', type: 'string', allowedNull: false },
-			{ name: 'location', type: 'string', allowedNull: true },
-			{ name: 'district', type: 'boolean', allowedNull: false }
+			{ name: 'week', type: 'integer', allowNull: false },
+			{ name: 'code', type: 'string', allowNull: false, unique: true },
+			{ name: 'name', type: 'string', allowNull: false },
+			{ name: 'location', type: 'string', allowNull: true },
+			{ name: 'district', type: 'boolean', allowNull: false }
 		]),
 		dbServer.conventions.newTable('events')
 	);

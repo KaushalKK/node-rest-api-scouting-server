@@ -3,8 +3,8 @@ module.exports = function(dbServer) {
 
 	return dbServer.define('teams',
 		dbServer.conventions.newFieldSet([
-			{ name: 'name', type: 'string', allowedNull: true },
-			{ name: 'number', type: 'integer', allowedNull: false }
+			{ name: 'name', type: 'string', allowNull: true },
+			{ name: 'number', type: 'integer', allowNull: false, unique: true }
 		]),
 		dbServer.conventions.newTable('teams')
 	);

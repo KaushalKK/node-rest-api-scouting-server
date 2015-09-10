@@ -3,13 +3,13 @@ module.exports = function(dbServer) {
 
 	return dbServer.define('matches',
 		dbServer.conventions.newFieldSet([
-			{ name: 'team', type: 'integer', allowedNull: false },
-			{ name: 'number', type: 'integer', allowedNull: false },
-			{ name: 'penalties', type: 'integer', allowedNull: true },
-			{ name: 'auto_points', type: 'integer', allowedNull: true },
-			{ name: 'tele_points', type: 'integer', allowedNull: true },
-			{ name: 'endgame_pts', type: 'integer', allowedNull: true },
-			{ name: 'total_points', type: 'integer', allowedNull: true }
+			{ name: 'team', type: 'integer', allowNull: false },
+			{ name: 'number', type: 'integer', allowNull: false },
+			{ name: 'penalties', type: 'integer', allowNull: true },
+			{ name: 'auto_points', type: 'integer', allowNull: true },
+			{ name: 'tele_points', type: 'integer', allowNull: true },
+			{ name: 'endgame_pts', type: 'integer', allowNull: true },
+			{ name: 'total_points', type: 'integer', allowNull: true }
 		]),
 		dbServer.conventions.newTable('matches')
 	);
