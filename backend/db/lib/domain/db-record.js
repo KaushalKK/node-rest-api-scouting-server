@@ -1,4 +1,5 @@
 var q = require('q');
+var uuid = require('node-uuid');
 
 module.exports = function (model, dbContext) {
 	'use strict';
@@ -91,7 +92,7 @@ module.exports = function (model, dbContext) {
 			var deferred = q.defer();
 
 			/* Generating unique identifier for a new record. */
-			details.id = dbContext.server.Utils.generateUUID();
+			details.id = uuid.v1();
 
 			model.create(details).then(function (record) {
 				deferred.resolve(record.dataValues);

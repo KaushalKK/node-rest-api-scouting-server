@@ -27,7 +27,7 @@ if ('development' === app.get('env')) {
 var config = require('./config');
 var db = require('./backend/db/db-index')(config.db);
 var domain = require('./backend/api-router/lib/domain/api-domain')(db);
-var api = require('./backend/api-router/api-router')(app, config, domain);
+var api = require('./backend/api-router/api-router')(app, domain);
 
 api.configureRoutes();
 /* End Backend Setup */
