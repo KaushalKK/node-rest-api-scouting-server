@@ -3,6 +3,7 @@ module.exports = function(dbContext) {
 
 	return {
 		teams: require('./teams')(dbContext),
-		events: require('./events')(dbContext)
+		events: require('./events')(dbContext),
+		matches: require('./matches')(dbContext)
 	};
 };

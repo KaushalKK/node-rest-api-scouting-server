@@ -12,7 +12,8 @@ module.exports = function(domain) {
 			return res.send(resp);
 		})
 		.catch(function(err) {
-			return res.status(400).send(err);
+			var error = err.name.indexOf('sequelize') > -1 ? err.errors[0].message : err ;
+			return res.status(400).send(error);
 		});
 	},
 	
@@ -25,9 +26,7 @@ module.exports = function(domain) {
 	},
 	
 	createEventMatch = function(req, res) {
-		var teamNum = req.params.team;
-		console.log('Team: ' + teamNum + ' Matches requested');
-		return res.send({'message': 'Team: ' + teamNum + ' Matches requested'});
+		processRequest(domain.matches.create(req.params.event, req.body), res);
 	};
 	
 	return {

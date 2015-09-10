@@ -11,7 +11,7 @@ module.exports = function (db) {
 			.then(function(connection) {
 				return connection.domain.teams.create({
 					name: details.name,
-					number: details.number
+					team_number: details.number
 				});
 			})
 			.then(function(createdTeam) {

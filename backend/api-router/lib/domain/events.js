@@ -11,8 +11,8 @@ module.exports = function (db) {
 			.then(function(connection) {
 				return connection.domain.events.create({
 					name: details.name,
-					code: details.code,
 					week: details.week,
+					event_code: details.code,
 					location: details.location,
 					district: details.isDistrict
 				});
