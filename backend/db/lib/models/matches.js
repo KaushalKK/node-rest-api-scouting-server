@@ -3,35 +3,13 @@ module.exports = function(dbServer) {
 
 	return dbServer.define('matches',
 		dbServer.conventions.newFieldSet([
+			{ name: 'team', type: 'integer', allowedNull: false },
 			{ name: 'number', type: 'integer', allowedNull: false },
-			{ name: 'red_final', type: 'integer', allowedNull: false },
-			{ name: 'blue_final', type: 'integer', allowedNull: false },
-			{ name: 'red_penalty', type: 'integer', allowedNull: false },
-			{ name: 'blue_penalty', type: 'integer', allowedNull: false },
-			
-			{ name: 'red_one', type: 'integer', allowedNull: false },
-			{ name: 'red_one_score', type: 'integer', allowedNull: true },
-			{ name: 'red_one_penalty', type: 'integer', allowedNull: true },
-			
-			{ name: 'red_two', type: 'integer', allowedNull: false },
-			{ name: 'red_two_score', type: 'integer', allowedNull: true },
-			{ name: 'red_two_penalty', type: 'integer', allowedNull: true },
-			
-			{ name: 'red_three', type: 'integer', allowedNull: false },
-			{ name: 'red_three_score', type: 'integer', allowedNull: true },
-			{ name: 'red_three_penalty', type: 'integer', allowedNull: true },
-			
-			{ name: 'blue_one', type: 'integer', allowedNull: false },
-			{ name: 'blue_one_score', type: 'integer', allowedNull: true },
-			{ name: 'blue_one_penalty', type: 'integer', allowedNull: true },
-			
-			{ name: 'blue_two', type: 'integer', allowedNull: false },
-			{ name: 'blue_two_score', type: 'integer', allowedNull: true },
-			{ name: 'blue_two_penalty', type: 'integer', allowedNull: true },
-			
-			{ name: 'blue_three', type: 'integer', allowedNull: false },
-			{ name: 'blue_three_score', type: 'integer', allowedNull: true },
-			{ name: 'blue_three_penalty', type: 'integer', allowedNull: true }
+			{ name: 'penalties', type: 'integer', allowedNull: true },
+			{ name: 'auto_points', type: 'integer', allowedNull: true },
+			{ name: 'tele_points', type: 'integer', allowedNull: true },
+			{ name: 'endgame_pts', type: 'integer', allowedNull: true },
+			{ name: 'total_points', type: 'integer', allowedNull: true }
 		]),
 		dbServer.conventions.newTable('matches')
 	);

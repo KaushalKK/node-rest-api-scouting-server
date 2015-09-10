@@ -33,7 +33,7 @@ api.configureRoutes();
 /* End Backend Setup */
 
 http.createServer(app).listen(app.get('port'), function () {
-	console.log('com.td.oca.itmProductCatalogApiServer server listening on port ' + app.get('port'));
+	console.log('Scouting server listening on port ' + app.get('port'));
 });
 
 /* ONLY UNCOMMENT TO UPDATE DB SCHEMA

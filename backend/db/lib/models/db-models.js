@@ -15,29 +15,23 @@ module.exports = function (dbServer) {
 	};
 	
 	/* Team Relationships */
-	/*me.teams.hasMany(me.awards, {
-		foreignKey: 'award_name',
-		as: 'award'
-	});
-	
-	me.teams.hasMany(me.events, {
-		foreignKey: 'event_code',
-		as: 'event'
-	});
-	
-	me.teams.hasMany(me.matches, {
+	me.matches.belongsToMany(me.teams, {
 		foreignKey: 'match_number',
-		as: 'match'
-	});*/
-	
-	/* Match Relationships */
-	me.matches.hasOne(me.events, {
-		foreignKey: 'event'
+		through: 'team_matches',
+		as: 'team_matches'
 	});
 	
-	/* Award Relationships */
-	me.awards.hasOne(me.events, {
-		foreignKey: 'event'
+	/* Event Relationships */
+	me.events.hasMany(me.awards, {
+		foreignKey: 'event_code'
+	});
+	
+	me.events.hasMany(me.matches, {
+		foreignKey: 'event_code'
+	});
+	
+	me.events.hasMany(me.teams, {
+		foreignKey: 'event_code'
 	});
 	
 	return me;
