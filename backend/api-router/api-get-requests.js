@@ -12,7 +12,7 @@ module.exports = function(domain) {
 			return res.send(resp);
 		})
 		.catch(function(err) {
-			return res.sendStatus(400);	
+			return res.status(400).send(err);	
 		});
 	},
 	
@@ -25,6 +25,11 @@ module.exports = function(domain) {
 		var teamNum = req.params.team;
 		console.log('Team: ' + teamNum + ' Matches requested');
 		return res.send({'message': 'Team: ' + teamNum + ' Matches requested'});
+	},
+	
+	getEvent = function(req, res) {
+		console.log('Event: ' + req.params.event + ' requested');
+		processRequest(domain.events.findByEventCode(req.params.event), res);
 	},
 	
 	getEventTeams = function(req, res) {
@@ -58,6 +63,7 @@ module.exports = function(domain) {
 		teamMatches: getTeamMatches,
 		
 		/* Event Requests */
+		event: getEvent,
 		eventTeams: getEventTeams,
 		eventAwards: getEventAwards,
 		eventMatches: getEventMatches,

@@ -12,12 +12,16 @@ module.exports = function(domain) {
 			return res.send(resp);
 		})
 		.catch(function(err) {
-			return res.sendStatus(400);	
+			return res.status(400).send(err);
 		});
 	},
 	
 	createTeam = function(req, res) {
 		processRequest(domain.teams.create(req.body), res);
+	},
+	
+	createEvent = function(req, res) {
+		processRequest(domain.events.create(req.body), res);
 	},
 	
 	createEventMatch = function(req, res) {
@@ -31,6 +35,7 @@ module.exports = function(domain) {
 		team: createTeam,
 
 		/* Event Requests */
+		event: createEvent,
 		eventMatch: createEventMatch
 	};
 };
