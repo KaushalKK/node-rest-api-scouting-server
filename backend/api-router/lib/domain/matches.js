@@ -10,13 +10,14 @@ module.exports = function (db) {
 			db.server.context.connect()
 			.then(function(connection) {
 				return connection.domain.matches.create({
+					dq: details.dq || false,
 					team: details.teamNumber,
-					penalties: details.penalties,
-					auto_points: details.autoPoints,
-					tele_points: details.telePoints,
 					match_number: details.matchNumber,
-					total_points: details.totalPoints,
-					endgame_pts: details.endgamePoints
+					penalties: details.penalties || 0,
+					auto_points: details.autoPoints || 0,
+					tele_points: details.telePoints || 0,
+					total_points: details.totalPoints || 0,
+					endgame_pts: details.endgamePoints || 0
 				});
 			})
 			.then(function(createdMatch) {

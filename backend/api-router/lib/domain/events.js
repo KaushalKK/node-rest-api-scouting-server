@@ -12,9 +12,9 @@ module.exports = function (db) {
 				return connection.domain.events.create({
 					name: details.name,
 					week: details.week,
-					event_code: details.code,
-					location: details.location,
-					district: details.isDistrict
+					district: details.isDistrict,
+					event_code: details.eventCode,
+					location: details.location || ''
 				});
 			})
 			.then(function(createdTeam) {
