@@ -7,7 +7,7 @@ module.exports = function (dbContext) {
 		searchByEventCode: function(eventCode) {
 			return dbContext.models.events.findOne({
 				where: {
-					'code': eventCode
+					'event_code': eventCode
 				}
 			})
 			.then(function(resp) {

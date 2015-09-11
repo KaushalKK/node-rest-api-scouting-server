@@ -18,21 +18,15 @@ module.exports = function (dbServer) {
 	me.matches.belongsToMany(me.teams, {
 		foreignKey: 'match_number',
 		through: 'team_matches',
-		as: 'team_matches'
+		as: 'teamMatches'
 	});
 	
 	/* Event Relationships */
-	me.events.hasMany(me.awards, {
-		foreignKey: 'event_code'
-	});
-	
 	me.events.hasMany(me.matches, {
 		foreignKey: 'event_code'
 	});
 	
-	me.events.hasMany(me.teams, {
-		foreignKey: 'event_code'
-	});
-	
+	me.matches.hasOne(me.events, { constraints: false });
+
 	return me;
 };

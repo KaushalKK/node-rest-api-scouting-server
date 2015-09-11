@@ -1,6 +1,6 @@
 var q = require('q');
 
-module.exports = function (db) {
+module.exports = function (db, apiDomain) {
 	'use strict';
 	
 	return {

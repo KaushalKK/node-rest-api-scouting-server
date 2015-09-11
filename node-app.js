@@ -36,7 +36,9 @@ http.createServer(app).listen(app.get('port'), function () {
 	console.log('Scouting server listening on port ' + app.get('port'));
 });
 
-/* ONLY UNCOMMENT TO UPDATE DB SCHEMA
+/* 
+ * ONLY UNCOMMENT TO UPDATE DB SCHEMA
+ *
 var q = require('q');
 
 q.when()

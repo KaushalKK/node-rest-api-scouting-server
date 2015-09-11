@@ -12,49 +12,60 @@ module.exports = function(domain) {
 			return res.send(resp);
 		})
 		.catch(function(err) {
-			return res.status(400).send(err);	
+			var error = '';
+
+			if (err.name.indexOf('Sequelize') > -1) {
+				error += err.message ? err.message + '.' : '';
+				err.errors.forEach(function(errList) {
+					error += (error.length > 0 ? ' ' : '') + errList.message + '.';
+				});
+			} else {
+				error = err;
+			}
+			
+			return res.status(400).send({'error': error});
 		});
 	},
 	
 	getTeam = function(req, res) {
-		console.log('Team: ' + req.params.team + ' requested');
+		console.log('GET Team ' + req.params.team);
 		processRequest(domain.teams.findByNum(req.params.team), res);
 	},
 	
 	getTeamMatches = function(req, res) {
 		var teamNum = req.params.team;
-		console.log('Team: ' + teamNum + ' Matches requested');
-		return res.send({'message': 'Team: ' + teamNum + ' Matches requested'});
+		console.log('GET Matches for Team ' + teamNum);
+		return res.send({'message': 'GET Matches for Team ' + teamNum});
 	},
 	
 	getEvent = function(req, res) {
-		console.log('Event: ' + req.params.event + ' requested');
+		console.log('GET Event ' + req.params.event);
 		processRequest(domain.events.findByEventCode(req.params.event), res);
 	},
 	
 	getEventTeams = function(req, res) {
 		var eventCode = req.params.event;
-		console.log('Event: ' + eventCode + ' Teams requested');
-		return {'message': 'Event: ' + eventCode + ' Teams requested'};
+		console.log('GET Teams for Event ' + eventCode);
+		return {'message': 'GET Teams for Event ' + eventCode};
 	},
 	
 	getEventAwards = function(req, res) {
 		var eventCode = req.params.event;
-		console.log('Event: ' + eventCode + ' Awards requested');
-		return {'message': 'Event: ' + eventCode + ' Awards requested'};
+		console.log('GET Awards for Event ' + eventCode);
+		return {'message': 'GET Awards for Event ' + eventCode};
 	},
 	
 	getEventMatches = function(req, res) {
 		var eventCode = req.params.event;
-		console.log('Event: ' + eventCode + ' Matches requested');
-		return {'message': 'Event: ' + eventCode + ' Matches requested'};
+		console.log('GET Matches for Event: ' + eventCode);
+		return {'message': 'GET Matches for Event: ' + eventCode};
 	},
 	
 	getEventMatchByNumber = function(req, res) {
 		var eventCode = req.params.event;
 		var matchNum = req.params.match;
-		console.log('Event: ' + eventCode + ' Match: ' + matchNum + ' requested');
-		return {'message': 'Event: ' + eventCode + ' Match: ' + matchNum + ' requested'};
+		console.log('GET Match ' + matchNum + ' for Event ' + eventCode);
+		return {'message': 'GET Match ' + matchNum + ' for Event ' + eventCode};
 	};
 	
 	return {

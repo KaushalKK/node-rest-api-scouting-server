@@ -7,7 +7,7 @@ module.exports = function (dbContext) {
 		searchByNumber: function(teamNum) {
 			return dbContext.models.teams.findOne({
 				where: {
-					'number': teamNum
+					'team_number': teamNum
 				}
 			})
 			.then(function(resp) {

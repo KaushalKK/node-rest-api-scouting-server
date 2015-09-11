@@ -13,10 +13,11 @@ module.exports = function(domain) {
 		})
 		.catch(function(err) {
 			var error = '';
-			
+
 			if (err.name.indexOf('Sequelize') > -1) {
+				error += err.message ? err.message + '.' : '';
 				err.errors.forEach(function(errList) {
-					error += errList.message + '. ';
+					error += (error.length > 0 ? ' ' : '') + errList.message + '.';
 				});
 			} else {
 				error = err;
@@ -25,7 +26,7 @@ module.exports = function(domain) {
 			return res.status(400).send({'error': error});
 		});
 	},
-	
+
 	createTeam = function(req, res) {
 		processRequest(domain.teams.create(req.body), res);
 	},

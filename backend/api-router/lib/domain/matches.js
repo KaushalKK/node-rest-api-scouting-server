@@ -1,15 +1,21 @@
 var q = require('q');
 
-module.exports = function (db) {
+module.exports = function (db, apiDomain) {
 	'use strict';
 	
 	return {
 		create: function(eventCode, details) {
-			var deferred = q.defer();
+			var eventId = null,
+				deferred = q.defer();
 			
-			db.server.context.connect()
+			apiDomain.events.findByEventCode(eventCode)
+			.then(function(event) {
+				eventId = event.id ? event.id : eventCode;
+				return db.server.context.connect();
+			})
 			.then(function(connection) {
 				return connection.domain.matches.create({
+					event_code: eventId,
 					dq: details.dq || false,
 					team: details.teamNumber,
 					match_number: details.matchNumber,
