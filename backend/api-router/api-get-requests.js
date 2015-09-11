@@ -34,7 +34,7 @@ module.exports = function(domain) {
 	
 	getTeamEventMatches = function(req, res) {
 		console.log('GET Matches for Team ' + req.params.team + ' at Event ' + req.params.event);
-		processRequest(domain.teams.getMatchesByEvent(req.params.team), res);
+		processRequest(domain.teams.getMatchesByEvent(req.params.team, req.params.event), res);
 	},
 	
 	getEvent = function(req, res) {

@@ -54,6 +54,10 @@ module.exports = function(dbConfig) {
 				if (typeof (field.values) !== 'undefined') {
 					definition.values = field.values;
 				}
+				
+				if (typeof (field.primaryKey) !== 'undefined') {
+					definition.primaryKey = field.primaryKey;
+				}
 
 				ret[field.name] = definition;
 			});

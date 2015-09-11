@@ -1,4 +1,4 @@
-module.exports = function (dbContext) {
+module.exports = function (dbContext, dbDomain) {
 	'use strict';
 
 	return require('./db-record')(dbContext.models.matches, dbContext);

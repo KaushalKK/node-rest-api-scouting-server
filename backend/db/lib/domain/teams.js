@@ -1,4 +1,4 @@
-module.exports = function (dbContext) {
+module.exports = function (dbContext, dbDomain) {
 	'use strict';
 
 	var record = require('./db-record')(dbContext.models.teams, dbContext);
@@ -9,6 +9,19 @@ module.exports = function (dbContext) {
 				where: {
 					'team_number': teamNum
 				}
+			})
+			.then(function(resp) {
+				return resp.dataValues || resp;
+			})
+			.catch(function(err) {
+				return err;
+			});
+		},
+		
+		getEventMatches: function(teamNum, eventCode) {
+			return dbDomain.matches.search({
+				'team_number': teamNum,
+				'event_code': eventCode
 			})
 			.then(function(resp) {
 				return resp.dataValues || resp;

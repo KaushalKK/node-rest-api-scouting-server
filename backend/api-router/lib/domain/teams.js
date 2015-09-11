@@ -29,7 +29,7 @@ module.exports = function (db, apiDomain) {
 
 			db.server.context.connect()
 			.then(function(connection) {
-				return connection.domain.teams.searchByNumber(parseInt(teamNum));
+				return connection.domain.teams.searchByNumber(teamNum);
 			})
 			.then(function(team) {
 				deferred.resolve(team);
@@ -46,10 +46,7 @@ module.exports = function (db, apiDomain) {
 			
 			db.server.context.connect()
 			.then(function(connection) {
-				return connection.domain.matches.search({
-					event_code: eventCode,
-					team_number: parseInt(teamNum)
-				});
+				return connection.domain.teams.getEventMatches(teamNum, eventCode);
 			})
 			.then(function(matches) {
 				deferred.resolve(matches);

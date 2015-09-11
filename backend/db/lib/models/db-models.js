@@ -14,5 +14,15 @@ module.exports = function (dbServer) {
 		// users: require('./users')(dbServer)
 	};
 	
+	me.events.hasOne(me.matches, {
+		foreignKey: 'event_code',
+		as: 'Event'
+	});
+	
+	me.teams.hasMany(me.matches, {
+		foreignKey: 'team_number',
+		as: 'Team'
+	});
+	
 	return me;
 };
