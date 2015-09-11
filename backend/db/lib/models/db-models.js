@@ -8,8 +8,11 @@ module.exports = function (dbServer) {
 		teams: require('./teams')(dbServer),
 		awards: require('./awards')(dbServer),
 		events: require('./events')(dbServer),
-		matches: require('./matches')(dbServer)
-		
+		matches: require('./matches')(dbServer),
+
+		/* Join Models */
+		eventsTeams: require('./eventsTeams')(dbServer)
+
 		/* System Management Models */
 		// users: require('./users')(dbServer)
 	};
@@ -24,5 +27,15 @@ module.exports = function (dbServer) {
 		as: 'Team'
 	});
 	
+	me.teams.belongsToMany(me.events, {
+		through: me.eventsTeams,
+		foreignKey: 'team_number'
+	});
+
+	me.events.belongsToMany(me.teams, {
+		through: me.eventsTeams,
+		foreignKey: 'event_code'
+	});
+
 	return me;
 };

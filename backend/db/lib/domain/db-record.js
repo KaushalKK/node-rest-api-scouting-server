@@ -1,5 +1,4 @@
 var q = require('q');
-var uuid = require('node-uuid');
 
 module.exports = function (model, dbContext) {
 	'use strict';
@@ -93,7 +92,7 @@ module.exports = function (model, dbContext) {
 
 			/* Generating unique identifier for a new record. */
 			if (typeof (hasId) === 'undefined' || hasId) {
-				details.id = uuid.v1();
+				details.id = 0;
 			}
 
 			model.create(details).then(function (record) {

@@ -36,7 +36,13 @@ Code Repository to test development of a Node JS, Angular, Express application t
 	"penalties": <INTEGER>			// OPTIONAL (0 if not specified)
 }
 ```
-
+##### Register Teams for an Event
+[x] POST /api/scouting/event/**Event Code**/teams
+```
+{
+	"teams": <ARRAY>				// Array of Team #'s to associate with event
+}
+```
 #### GET Methods
 ##### For Teams
 ##### Get Team Information

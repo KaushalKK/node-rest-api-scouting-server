@@ -35,7 +35,11 @@ module.exports = function(domain) {
 		processRequest(domain.events.create(req.body), res);
 	},
 	
-	createEventMatch = function(req, res) {
+	registerTeamsToEvent = function(req, res) {
+		processRequest(domain.events.registerTeams(req.params.event, req.body), res);
+	},
+	
+	createMatch = function(req, res) {
 		processRequest(domain.matches.create(req.params.event, req.body), res);
 	};
 	
@@ -45,6 +49,7 @@ module.exports = function(domain) {
 
 		/* Event Requests */
 		event: createEvent,
-		eventMatch: createEventMatch
+		eventMatch: createMatch,
+		registerTeams: registerTeamsToEvent
 	};
 };

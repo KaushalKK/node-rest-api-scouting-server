@@ -34,8 +34,25 @@ module.exports = function (db, apiDomain) {
 			.then(function(connection) {
 				return connection.domain.events.searchByEventCode(eventCode);
 			})
-			.then(function(team) {
-				deferred.resolve(team);
+			.then(function(event) {
+				deferred.resolve(event);
+			})
+			.catch(function(err) {
+				deferred.reject(err);
+			});
+			
+			return deferred.promise;
+		},
+		
+		registerTeams: function(eventCode, details) {
+			var deferred = q.defer();
+
+			db.server.context.connect()
+			.then(function(connection) {
+				return connection.domain.events.registerTeams(eventCode, details.teams);
+			})
+			.then(function(eventTeams) {
+				deferred.resolve(eventTeams);
 			})
 			.catch(function(err) {
 				deferred.reject(err);

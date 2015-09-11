@@ -28,7 +28,8 @@ module.exports = function(dbConfig) {
 			/* Record Id is always there. */
 			if(typeof (otherPrimary) === 'undefined' || otherPrimary) {
 				ret.id = {
-					type: Sequelize.UUID,
+					type: Sequelize.INTEGER,
+					autoIncrement: true,
 					primaryKey: true
 				};
 			}
