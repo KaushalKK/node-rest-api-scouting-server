@@ -32,10 +32,9 @@ module.exports = function(domain) {
 		processRequest(domain.teams.findByNum(req.params.team), res);
 	},
 	
-	getTeamMatches = function(req, res) {
-		var teamNum = req.params.team;
-		console.log('GET Matches for Team ' + teamNum);
-		return res.send({'message': 'GET Matches for Team ' + teamNum});
+	getTeamEventMatches = function(req, res) {
+		console.log('GET Matches for Team ' + req.params.team + ' at Event ' + req.params.event);
+		processRequest(domain.teams.getMatchesByEvent(req.params.team), res);
 	},
 	
 	getEvent = function(req, res) {
@@ -71,7 +70,7 @@ module.exports = function(domain) {
 	return {
 		/* Team Requests */
 		team: getTeam,
-		teamMatches: getTeamMatches,
+		teamEventMatches: getTeamEventMatches,
 		
 		/* Event Requests */
 		event: getEvent,

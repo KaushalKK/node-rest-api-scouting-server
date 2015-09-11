@@ -39,6 +39,26 @@ module.exports = function (db, apiDomain) {
 			});
 			
 			return deferred.promise;
+		},
+		
+		getMatchesByEvent: function(teamNum, eventCode) {
+			var deferred = q.defer();
+			
+			db.server.context.connect()
+			.then(function(connection) {
+				return connection.domain.matches.search({
+					event_code: eventCode,
+					team_number: parseInt(teamNum)
+				});
+			})
+			.then(function(matches) {
+				deferred.resolve(matches);
+			})
+			.catch(function(err) {
+				deferred.reject(err);
+			});
+			
+			return deferred.promise;
 		}
 	};
 };

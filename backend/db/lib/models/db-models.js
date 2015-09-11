@@ -14,19 +14,5 @@ module.exports = function (dbServer) {
 		// users: require('./users')(dbServer)
 	};
 	
-	/* Team Relationships */
-	me.matches.belongsToMany(me.teams, {
-		foreignKey: 'match_number',
-		through: 'team_matches',
-		as: 'teamMatches'
-	});
-	
-	/* Event Relationships */
-	me.events.hasMany(me.matches, {
-		foreignKey: 'event_code'
-	});
-	
-	me.matches.hasOne(me.events, { constraints: false });
-
 	return me;
 };

@@ -5,19 +5,14 @@ module.exports = function (db, apiDomain) {
 	
 	return {
 		create: function(eventCode, details) {
-			var eventId = null,
-				deferred = q.defer();
+			var deferred = q.defer();
 			
-			apiDomain.events.findByEventCode(eventCode)
-			.then(function(event) {
-				eventId = event.id ? event.id : eventCode;
-				return db.server.context.connect();
-			})
+			db.server.context.connect()
 			.then(function(connection) {
 				return connection.domain.matches.create({
-					event_code: eventId,
+					event_code: eventCode,
 					dq: details.dq || false,
-					team: details.teamNumber,
+					team_number: details.teamNumber,
 					match_number: details.matchNumber,
 					penalties: details.penalties || 0,
 					auto_points: details.autoPoints || 0,
@@ -34,6 +29,6 @@ module.exports = function (db, apiDomain) {
 			});
 			
 			return deferred.promise;
-		}
+		}		
 	};
 };
