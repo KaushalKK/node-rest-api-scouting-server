@@ -23,7 +23,7 @@ Code Repository to test development of a Node JS, Angular, Express application t
 }
 ```
 ##### Create Match at Event
-[x] POST /api/scouting/event/:eventCode/match
+[x] POST /api/scouting/event/**Event Code**/match
 ```
 {
 	"dq": <BOOLEAN>,				// OPTIONAL (false if not specified)
@@ -40,17 +40,17 @@ Code Repository to test development of a Node JS, Angular, Express application t
 #### GET Methods
 ##### For Teams
 ##### Get Team Information
-[x] GET /api/scouting/team/:teamNumber
+[x] GET /api/scouting/team/**Team Number**
 ##### Get all Matches at Event for a Team
-[x] GET /api/scouting/team/:teamNumber/:eventCode/matches
+[x] GET /api/scouting/team/**Team Number**/**Event Code**/matches
 ##### For Events
 ##### Get Event Information
-[x] GET /api/scouting/event/:eventCode
+[x] GET /api/scouting/event/**Event Code**
 ##### Get all Teams attending an Event
-[ ] GET /api/scouting/event/:eventCode/teams
+[ ] GET /api/scouting/event/**Event Code**/teams
 ##### Get all Awards for an Event
-[ ] GET /api/scouting/event/:eventCode/awards
+[ ] GET /api/scouting/event/**Event Code**/awards
 ##### Get all Matches at an Event
-[ ] GET /api/scouting/event/:eventCode/matches
+[ ] GET /api/scouting/event/**Event Code**/matches
 ##### Get a specific Match at an Event
-[ ] GET /api/scouting/event/:eventCode/matches/:matchNumber
+[ ] GET /api/scouting/event/**Event Code**/matches/**Match Number**
