@@ -12,7 +12,7 @@ module.exports = function (db) {
 				return connection.domain.teams.create({
 					name: details.name,
 					team_number: details.number
-				});
+				}, false);
 			})
 			.then(function(createdTeam) {
 				deferred.resolve(createdTeam);

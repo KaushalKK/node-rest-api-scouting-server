@@ -15,7 +15,7 @@ module.exports = function (db) {
 					district: details.isDistrict,
 					event_code: details.eventCode,
 					location: details.location || ''
-				});
+				}, false);
 			})
 			.then(function(createdTeam) {
 				deferred.resolve(createdTeam);

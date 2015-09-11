@@ -88,11 +88,13 @@ module.exports = function (model, dbContext) {
 		 * @param details {object} Record.
 		 * @returns {*|Promise.<Array.<Instance>>} A promise which, when resolves, passes the result of an operation.
 		 */
-		create: function (details) {
+		create: function (details, hasId) {
 			var deferred = q.defer();
 
 			/* Generating unique identifier for a new record. */
-			details.id = uuid.v1();
+			if (typeof (hasId) === 'undefined' || hasId) {
+				details.id = uuid.v1();
+			}
 
 			model.create(details).then(function (record) {
 				deferred.resolve(record.dataValues);

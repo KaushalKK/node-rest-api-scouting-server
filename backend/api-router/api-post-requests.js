@@ -12,8 +12,17 @@ module.exports = function(domain) {
 			return res.send(resp);
 		})
 		.catch(function(err) {
-			var error = err.name.indexOf('sequelize') > -1 ? err.errors[0].message : err ;
-			return res.status(400).send(error);
+			var error = '';
+			
+			if (err.name.indexOf('Sequelize') > -1) {
+				err.errors.forEach(function(errList) {
+					error += errList.message + '. ';
+				});
+			} else {
+				error = err;
+			}
+			
+			return res.status(400).send({'error': error});
 		});
 	},
 	

@@ -22,14 +22,16 @@ module.exports = function(dbConfig) {
 			* Returns a database convention description for new field set.
 			* @param {Array} fields Fields.
 			*/
-		newFieldSet: function (fields) {
+		newFieldSet: function (fields, otherPrimary) {
 			var ret = {};
 
 			/* Record Id is always there. */
-			ret.id = {
-				type: Sequelize.UUID,
-				primaryKey: true
-			};
+			if(typeof (otherPrimary) === 'undefined' || otherPrimary) {
+				ret.id = {
+					type: Sequelize.UUID,
+					primaryKey: true
+				};
+			}
 
 			fields.forEach(function (field) {
 				var definition = {
