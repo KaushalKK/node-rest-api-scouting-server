@@ -28,10 +28,12 @@ module.exports = function (model, dbContext) {
 		/**
 		 * Returns all matching record.
 		 * @param criteria {object} Search criteria.
+		 * @param joins {array=} Optional array to only return certain columns from table
 		 * @param attributes {array=} Optional array to only return certain columns from table
+		 * @param sorting {array=} Optional array to only return certain columns from table
 		 * @returns {*|Promise.<Array.<Instance>>} A promise which, when resolves, passes the result of an operation.
 		 */
-		search: function (criteria, joins, /**array=*/attributes) {
+		search: function (criteria, /**array=*/joins, /**array=*/attributes, /**array=*/sorting) {
 			var effectiveCriteria = {},
 				deferred = q.defer(),
 				findOpts = {};
@@ -47,6 +49,7 @@ module.exports = function (model, dbContext) {
 			findOpts.where = effectiveCriteria;
 			findOpts.attributes = attributes ?  attributes : '';
 			findOpts.include = joins ? joins : '';
+			findOpts.order = sorting ? sorting : '';
 
 			model.findAll(findOpts)
 			.then(function (result) {

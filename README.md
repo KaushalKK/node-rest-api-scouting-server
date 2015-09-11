@@ -59,6 +59,6 @@ Code Repository to test development of a Node JS, Angular, Express application t
 ##### Get all Awards for an Event
 [ ] GET /api/scouting/event/**Event Code**/awards
 ##### Get all Matches at an Event
-[ ] GET /api/scouting/event/**Event Code**/matches
+[x] GET /api/scouting/event/**Event Code**/matches
 ##### Get a specific Match at an Event
 [ ] GET /api/scouting/event/**Event Code**/matches/**Match Number**

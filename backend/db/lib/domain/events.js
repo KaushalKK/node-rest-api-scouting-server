@@ -58,6 +58,18 @@ module.exports = function (dbContext, dbDomain) {
 			.catch(function(err) {
 				return err;
 			});
+		},
+		
+		getMatches: function(eventCode) {
+			return dbDomain.matches.search({
+				'event_code': eventCode
+			}, null, null, [['match_number', 'DESC']])
+			.then(function(resp) {
+				return resp.dataValues || resp;
+			})
+			.catch(function(err) {
+				return err;
+			});
 		}
 	});
 };

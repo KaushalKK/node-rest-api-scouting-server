@@ -76,6 +76,23 @@ module.exports = function (db, apiDomain) {
 			});
 
 			return deferred.promise;
+		},
+		
+		getMatches: function(eventCode) {
+			var deferred = q.defer();
+
+			db.server.context.connect()
+			.then(function(connection) {
+				return connection.domain.events.getMatches(eventCode);
+			})
+			.then(function(eventMatches) {
+				deferred.resolve(eventMatches);
+			})
+			.catch(function(err) {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
 		}
 	};
 };
