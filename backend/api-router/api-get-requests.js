@@ -37,15 +37,19 @@ module.exports = function(domain) {
 		processRequest(domain.teams.getMatchesByEvent(req.params.team, req.params.event), res);
 	},
 	
+	getTeamEvents = function(req, res) {
+		console.log('GET Events for Team ' + req.params.team);
+		processRequest(domain.teams.getRegisteredEvents(req.params.team), res);
+	},
+	
 	getEvent = function(req, res) {
 		console.log('GET Event ' + req.params.event);
 		processRequest(domain.events.findByEventCode(req.params.event), res);
 	},
 	
 	getEventTeams = function(req, res) {
-		var eventCode = req.params.event;
-		console.log('GET Teams for Event ' + eventCode);
-		return {'message': 'GET Teams for Event ' + eventCode};
+		console.log('GET Events for Team ' + req.params.event);
+		processRequest(domain.events.getRegisteredTeams(req.params.event), res);
 	},
 	
 	getEventAwards = function(req, res) {
@@ -70,6 +74,7 @@ module.exports = function(domain) {
 	return {
 		/* Team Requests */
 		team: getTeam,
+		teamEvents: getTeamEvents,
 		teamEventMatches: getTeamEventMatches,
 		
 		/* Event Requests */

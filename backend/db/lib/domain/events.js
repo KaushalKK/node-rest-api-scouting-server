@@ -34,6 +34,30 @@ module.exports = function (dbContext, dbDomain) {
 			.catch(function(err) {
 				return err;
 			});
+		},
+		
+		getTeams: function(eventCode) {
+			return dbContext.models.eventsTeams.findAll({
+				where: {
+					'event_code': eventCode
+				}
+			})
+			.then(function(eventTeams) {
+				var teams = [];
+				eventTeams.forEach(function(teamsAtEvent) {
+					teams.push(teamsAtEvent.dataValues.team_number);
+				});
+
+				return dbDomain.teams.search({
+					'team_number': teams
+				});
+			})
+			.then(function(resp) {
+				return resp.dataValues || resp;
+			})
+			.catch(function(err) {
+				return err;
+			});
 		}
 	});
 };

@@ -59,6 +59,23 @@ module.exports = function (db, apiDomain) {
 			});
 			
 			return deferred.promise;
+		},
+		
+		getRegisteredTeams: function(eventCode) {
+			var deferred = q.defer();
+
+			db.server.context.connect()
+			.then(function(connection) {
+				return connection.domain.events.getTeams(eventCode);
+			})
+			.then(function(teamsAtEvent) {
+				deferred.resolve(teamsAtEvent);
+			})
+			.catch(function(err) {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
 		}
 	};
 };

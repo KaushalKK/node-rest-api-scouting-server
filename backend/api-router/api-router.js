@@ -16,6 +16,7 @@ module.exports = function (app, domain) {
 			
 			/* Team Requests */
 			app.get(routePrefix + '/team/:team', getRequests.team);
+			app.get(routePrefix + '/team/:team/events', getRequests.teamEvents);
 			app.get(routePrefix + '/team/:team/:event/matches', getRequests.teamEventMatches);
 			
 			app.post(routePrefix + '/team', postRequests.team);

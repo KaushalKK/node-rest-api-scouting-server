@@ -47,13 +47,15 @@ Code Repository to test development of a Node JS, Angular, Express application t
 ##### For Teams
 ##### Get Team Information
 [x] GET /api/scouting/team/**Team Number**
+##### Get all Events for a Team
+[x] GET /api/scouting/team/**Team Number**/events
 ##### Get all Matches at Event for a Team
 [x] GET /api/scouting/team/**Team Number**/**Event Code**/matches
 ##### For Events
 ##### Get Event Information
 [x] GET /api/scouting/event/**Event Code**
 ##### Get all Teams attending an Event
-[ ] GET /api/scouting/event/**Event Code**/teams
+[x] GET /api/scouting/event/**Event Code**/teams
 ##### Get all Awards for an Event
 [ ] GET /api/scouting/event/**Event Code**/awards
 ##### Get all Matches at an Event
