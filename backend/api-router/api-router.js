@@ -25,7 +25,7 @@ module.exports = function (app, domain) {
 			app.get(routePrefix + '/event/:event/teams', getRequests.eventTeams);
 			app.get(routePrefix + '/event/:event/awards', getRequests.eventAwards);
 			app.get(routePrefix + '/event/:event/matches', getRequests.eventMatches);
-			app.get(routePrefix + '/event/:event/match/:match', getRequests.eventMatchByNumber);
+			app.get(routePrefix + '/event/:event/matches/:match', getRequests.eventMatchByNumber);
 
 			app.post(routePrefix + '/event', postRequests.event);
 			app.post(routePrefix + '/event/:event/match', postRequests.eventMatch);

@@ -3,15 +3,16 @@
 Code Repository to test development of a Node JS, Angular, Express application that will communicate with a MYSQL Database using Sequlize JS via a REST API interface.
 
 #### POST Methods
-/api/scouting/team
+##### Create Team
+[x] POST /api/scouting/team
 ```
 {
 	"name": <STRING>,
 	"number": <INTEGER>
 }
 ```
-
-/api/scouting/event
+##### Create Event
+[x] POST /api/scouting/event
 ```
 {
 	"name": <STRING>,
@@ -21,8 +22,8 @@ Code Repository to test development of a Node JS, Angular, Express application t
 	"isDistrict": <BOOLEAN>
 }
 ```
-
-/api/scouting/event/:eventCode/match
+##### Create Match at Event
+[x] POST /api/scouting/event/:eventCode/match
 ```
 {
 	"dq": <BOOLEAN>,				// OPTIONAL (false if not specified)
@@ -35,3 +36,21 @@ Code Repository to test development of a Node JS, Angular, Express application t
 	"penalties": <INTEGER>			// OPTIONAL (0 if not specified)
 }
 ```
+
+#### GET Methods
+##### For Teams
+##### Get Team Information
+[x] GET /api/scouting/team/:teamNumber
+##### Get all Matches at Event for a Team
+[x] GET /api/scouting/team/:teamNumber/:eventCode/matches
+##### For Events
+##### Get Event Information
+[x] GET /api/scouting/event/:eventCode
+##### Get all Teams attending an Event
+[ ] GET /api/scouting/event/:eventCode/teams
+##### Get all Awards for an Event
+[ ] GET /api/scouting/event/:eventCode/awards
+##### Get all Matches at an Event
+[ ] GET /api/scouting/event/:eventCode/matches
+##### Get a specific Match at an Event
+[ ] GET /api/scouting/event/:eventCode/matches/:matchNumber
