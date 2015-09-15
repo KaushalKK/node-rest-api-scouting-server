@@ -11,7 +11,8 @@ module.exports = function (dbServer) {
 		matches: require('./matches')(dbServer),
 
 		/* Join Models */
-		eventsTeams: require('./eventsTeams')(dbServer)
+		eventsTeams: require('./eventsTeams')(dbServer),
+		teamMatches: require('./teamsMatches')(dbServer)
 
 		/* System Management Models */
 		// users: require('./users')(dbServer)
@@ -22,11 +23,6 @@ module.exports = function (dbServer) {
 		as: 'Event'
 	});
 	
-	me.teams.hasMany(me.matches, {
-		foreignKey: 'team_number',
-		as: 'Team'
-	});
-	
 	me.teams.belongsToMany(me.events, {
 		through: me.eventsTeams,
 		foreignKey: 'team_number'
@@ -35,6 +31,16 @@ module.exports = function (dbServer) {
 	me.events.belongsToMany(me.teams, {
 		through: me.eventsTeams,
 		foreignKey: 'event_code'
+	});
+	
+	me.teams.belongsToMany(me.matches, {
+		through: me.teamMatches,
+		foreignKey: 'team_number'
+	});
+
+	me.matches.belongsToMany(me.teams, {
+		through: me.teamMatches,
+		foreignKey: 'match_uid'
 	});
 
 	return me;
