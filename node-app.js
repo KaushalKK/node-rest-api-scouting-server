@@ -36,24 +36,25 @@ http.createServer(app).listen(app.get('port'), function () {
 	console.log('Scouting server listening on port ' + app.get('port'));
 });
 
-/* 
- * ONLY UNCOMMENT TO UPDATE DB SCHEMA
- *
-var q = require('q');
 
-q.when()
-.then(function() {
-	return db.server.context.connect();
-})
-.then(function(connection) {
-	return connection.underlyingContext.context.updateSchema(true);
-})
-.then(function() {
-	console.log('success');
-	return;
-})
-.catch(function(err) {
-	console.log(err);
-	return err;	
-});
+/* UPDATE DB SCHEMA */
+if(process.argv[2] === '--update') {
+	var q = require('q');
+	
+	q.when()
+	.then(function() {
+		return db.server.context.connect();
+	})
+	.then(function(connection) {
+		return connection.underlyingContext.context.updateSchema(true);
+	})
+	.then(function() {
+		console.log('success');
+		return;
+	})
+	.catch(function(err) {
+		console.log(err);
+		return err;	
+	});	
+}
 /* END SCHEMA UPDATE BLOCK */

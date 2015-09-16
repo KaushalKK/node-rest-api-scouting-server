@@ -1,7 +1,7 @@
 module.exports = function(dbServer) {
 	'use strict';
 
-	return dbServer.define('matches',
+	return dbServer.define('teams_matches',
 		dbServer.conventions.newFieldSet([
 			{ name: 'match_number', type: 'integer', allowNull: false },
 			{ name: 'auto_points', type: 'integer', allowNull: false },
@@ -11,6 +11,6 @@ module.exports = function(dbServer) {
 			{ name: 'penalties', type: 'integer', allowNull: false },
 			{ name: 'dq', type: 'boolean', allowNull: false }
 		]),
-		dbServer.conventions.newTable('matches')
+		dbServer.conventions.newTable('teams_matches')
 	);
 };

@@ -41,6 +41,10 @@ module.exports = function(domain) {
 	
 	createMatch = function(req, res) {
 		processRequest(domain.matches.create(req.params.event, req.body), res);
+	},
+	
+	createMatchScheduleAtEvent = function(req, res) {
+		processRequest(domain.matches.fillEventSchedule(req.params.event, req.body), res);
 	};
 	
 	return {
@@ -50,6 +54,7 @@ module.exports = function(domain) {
 		/* Event Requests */
 		event: createEvent,
 		eventMatch: createMatch,
-		registerTeams: registerTeamsToEvent
+		registerTeams: registerTeamsToEvent,
+		matchSchedule: createMatchScheduleAtEvent
 	};
 };

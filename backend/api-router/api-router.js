@@ -31,6 +31,7 @@ module.exports = function (app, domain) {
 			app.post(routePrefix + '/event', postRequests.event);
 			app.post(routePrefix + '/event/:event/match', postRequests.eventMatch);
 			app.post(routePrefix + '/event/:event/teams', postRequests.registerTeams);
+			app.post(routePrefix + '/event/:event/schedule', postRequests.matchSchedule);
 		}
 	};
 };
