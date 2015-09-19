@@ -43,6 +43,13 @@ Code Repository to test development of a Node JS, Angular, Express application t
 	"teams": <ARRAY>				// Array of Team #'s to associate with event
 }
 ```
+##### Create empty schedule of Matches for an Event
+[x] POST /api/scouting/event/**Event Code**/schedule
+```
+{
+	"totalMatches": <INTEGER>		// Array of Team #'s to associate with event
+}
+```
 #### GET Methods
 ##### For Teams
 ##### Get Team Information
