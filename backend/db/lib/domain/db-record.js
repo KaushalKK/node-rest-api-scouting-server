@@ -118,13 +118,17 @@ module.exports = function (model, dbContext) {
 		 * @param details {object} Record.
 		 * @returns {*|Promise.<Array.<Instance>>} A promise which, when resolves, passes the result of an operation.
 		 */
-		update: function (id, details) {
-			return q.when()
+		update: function (id, details, colummnsToUpdate) {
+			var options = {
+                where: {
+                    id: id
+                },
+                fields: colummnsToUpdate.length ? colummnsToUpdate : ''
+            };
+
+            return q.when()
 				.then(function () {
-					return model.find(id);
-				})
-				.then(function (result) {
-					return result.update(details);
+					return model.update(details, options);
 				})
 				.then(function (result) {
 					return result.dataValues || result;
