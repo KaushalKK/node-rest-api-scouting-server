@@ -6,34 +6,44 @@ module.exports = function (db, apiDomain) {
 	return {
 		create: function(eventCode, details) {
 			var deferred = q.defer(),
+                creatingMatch = null,
 				c = null;
 			
 			db.server.context.connect()
 			.then(function(connection) {
-				var c = connection;
+				c = connection;
 				return c.domain.matches.search({
 					event_code: eventCode,
 					match_number: details.matchNumber
 				});
 			})
-			.then(function(match) {
-				
+            .then(function(match) {
+                creatingMatch = match[0];
+				return c.domain.matches.upsert({
+					id: match.id,
+					event_code: eventCode,
+					match_number: details.matchNumber,
+					red_score: details.redFinal || match.red_score || 0,
+					red_penalties: details.redPenalties || match.red_penalties || 0,
+					blue_score: details.blueFinal || match.blue_score || 0,
+					blue_penalties: details.bluePenalties || match.blue_penalties || 0
+				});
 			})
-			.then(function(createdMatch) {
-                var autoTotal = (details.autoHigh + details.autoBreach) * 10 + details.autoLow * 5 + details.autoReach * 2,
-                    teleTotal = (details.crossTotal + details.teleHigh) * 5 + details.teleLow * 2,
-                    endTotal = details.scaled * 15 + details.challenged * 5;
+			.then(function() {
+                var autoTotal = ((details.autoHigh || 0) + (details.autoBreach || 0)) * 10 + (details.autoLow || 0) * 5 + (details.autoReach || 0) * 2,
+                    teleTotal = ((details.crossTotal || 0) + (details.teleHigh || 0)) * 5 + (details.teleLow || 0) * 2,
+                    endTotal = (details.scaled || 0) * 15 + (details.challenged || 0) * 5;
 
-				c.domain.teamsMatches.create({
-					match_uid: createdMatch.id,
+				return c.domain.teamsMatches.create({
+					match_uid: creatingMatch.id,
 					team_number: details.teamNumber,
-					match_number: createdMatch.matchNumber,
+					match_number: creatingMatch.match_number,
                     
                     auto_high: details.autoHigh || 0,
 			        auto_low: details.autoLow || 0,
 			        auto_points: autoTotal || 0,
 		            outer_works_breach: details.autoBreach || 0,
-			        outer_works_category: details.autoBreachCategory || '',
+			        outer_works_category: details.autoBreachCategory || 'none',
 			        outer_works_reach: details.autoReach || 0,
                     /* Tele Op Columns */
                     boulder_pickup: details.telePickup || 0,
