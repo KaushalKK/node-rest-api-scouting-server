@@ -20,13 +20,13 @@ module.exports = function (db, apiDomain) {
             .then(function(match) {
                 creatingMatch = match[0];
 				return c.domain.matches.upsert({
-					id: match.id,
+					id: creatingMatch.id,
 					event_code: eventCode,
 					match_number: details.matchNumber,
-					red_score: details.redFinal || match.red_score || 0,
-					red_penalties: details.redPenalties || match.red_penalties || 0,
-					blue_score: details.blueFinal || match.blue_score || 0,
-					blue_penalties: details.bluePenalties || match.blue_penalties || 0
+					red_score: details.redFinal || creatingMatch.red_score || 0,
+					red_penalties: details.redPenalties || creatingMatch.red_penalties || 0,
+					blue_score: details.blueFinal || creatingMatch.blue_score || 0,
+					blue_penalties: details.bluePenalties || creatingMatch.blue_penalties || 0
 				});
 			})
 			.then(function() {
@@ -35,10 +35,12 @@ module.exports = function (db, apiDomain) {
                     endTotal = (details.scaled || 0) * 15 + (details.challenged || 0) * 5;
 
 				return c.domain.teamsMatches.create({
-					match_uid: creatingMatch.id,
-					team_number: details.teamNumber,
+					/* Link Columns */
+                    event_code: eventCode,
 					match_number: creatingMatch.match_number,
-                    
+                    match_uid: creatingMatch.id,
+					team_number: details.teamNumber,
+                    /* Auto Columns */
                     auto_high: details.autoHigh || 0,
 			        auto_low: details.autoLow || 0,
 			        auto_points: autoTotal || 0,
