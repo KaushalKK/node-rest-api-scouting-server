@@ -42,6 +42,11 @@ module.exports = function (dbServer) {
 		through: me.teamMatches,
 		foreignKey: 'match_uid'
 	});
+    
+    me.events.hasOne(me.teamMatches, {
+		foreignKey: 'event_code',
+		as: 'Event'
+	});
 
 	return me;
 };
