@@ -63,7 +63,7 @@ module.exports = function (dbContext, dbDomain) {
 		getMatches: function(eventCode) {
 			return dbDomain.matches.search({
 				'event_code': eventCode
-			}, null, null, [['match_number', 'DESC']])
+			}, null, null, ['match_number'])
 			.then(function(resp) {
 				return resp.dataValues || resp;
 			})
