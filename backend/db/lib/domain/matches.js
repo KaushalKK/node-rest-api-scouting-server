@@ -25,6 +25,28 @@ module.exports = function (dbContext, dbDomain) {
 			.catch(function(err) {
 				return err;
 			});
-		}
+		},
+        
+        getMatchByNumber: function(eventCode, matchNumber) {
+            var resp = {};
+
+            return record.search({
+                'event_code': eventCode,
+                'match_number': matchNumber
+            })
+            .then(function(eventMatch) {
+                resp = eventMatch[0];
+                return dbDomain.teamsMatches.search({
+                    match_uid: resp.id
+                });
+            })
+            .then(function(teamPerformanceInMatch) {
+                resp.teams = teamPerformanceInMatch;
+                return resp;
+            })
+            .catch(function(err) {
+                return err;
+            });
+        }
 	});
 };

@@ -93,6 +93,23 @@ module.exports = function (db, apiDomain) {
 			});
 
 			return deferred.promise;
-		}
+		},
+        
+        getMatchByNumber: function(eventCode, matchNumber) {
+            var deferred = q.defer();
+
+			db.server.context.connect()
+			.then(function(connection) {
+				return connection.domain.matches.getMatchByNumber(eventCode, matchNumber);
+			})
+			.then(function(matchAtEvent) {
+				deferred.resolve(matchAtEvent);
+			})
+			.catch(function(err) {
+				deferred.reject(err);
+			});
+
+			return deferred.promise;
+        }
 	};
 };
