@@ -6,8 +6,8 @@ module.exports = function (dbContext, dbDomain) {
 	return record.utils.extend({
 		createSchedule: function(eventCode, totalMatches) {
 			var matchesInSchedule = [];
-			
-			for(var i = 0; i < totalMatches; i++) {
+
+			for(var i = 1; i <= totalMatches; i++) {
 				matchesInSchedule.push({
 					'event_code': eventCode,
 					'match_number': i,
