@@ -40,19 +40,6 @@ module.exports = function (dbContext, dbDomain) {
 			.catch(function(err) {
 				return err;
 			});
-		},
-		
-		getEventMatches: function(teamNum, eventCode) {
-			return dbDomain.matches.search({
-				'team_number': teamNum,
-				'event_code': eventCode
-			})
-			.then(function(resp) {
-				return resp.dataValues || resp;
-			})
-			.catch(function(err) {
-				return err;
-			});
 		}
 	});
 };

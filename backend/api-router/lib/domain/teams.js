@@ -46,7 +46,7 @@ module.exports = function (db, apiDomain) {
 			
 			db.server.context.connect()
 			.then(function(connection) {
-				return connection.domain.teams.getEventMatches(teamNum, eventCode);
+				return connection.domain.teamsMatches.getEventMatches(teamNum, eventCode);
 			})
 			.then(function(matches) {
 				deferred.resolve(matches);
